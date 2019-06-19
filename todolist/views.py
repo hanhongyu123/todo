@@ -28,8 +28,19 @@ def home(request):
 
 
 
-def edit(request):
-    return render(request, 'todolist/edit.html')
+def edit(request,forloop_counter):
+    # print(type(forloop_counter))
+    if request.method=='POST':
+        content = request.POST.get('已修改事项')
+        # print(content)
+        if not content or content.strip() == '':
+            return render(request, 'todolist/edit.html', { '警告': '请输入内容'})
+        else:
+           lst[forloop_counter-1]['待办事项']=content
+           return redirect('todolist:主页')
+    else:
+        content =lst[forloop_counter-1]['待办事项']
+        return render(request, 'todolist/edit.html',{'待修改事项':content})
 
 
 
@@ -44,6 +55,6 @@ def delete(request,forloop_counter):
     global lst
 
     forloop_counter=int(forloop_counter)-1
-    print(forloop_counter)
+    # print(forloop_counter)
     lst.pop(forloop_counter)
     return redirect('todolist:主页')
