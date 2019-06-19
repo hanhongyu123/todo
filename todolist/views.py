@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 # Create your views here.
 
 lst=[
-    {'待办事项':'吃饭','已完成':False},
+    {'待办事项':'吃饭','已完成':True},
     {'待办事项':'逛街','已完成':False},
 ]
 
